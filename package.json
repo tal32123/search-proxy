@@ -1,11 +1,17 @@
 {
   "name": "search-proxy",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+	  "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+	  "start:frontend": "npm --prefix frontend run dev",
+		"start:backend": "npm --prefix backend run start:dev"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^8.2.2"
   }
 }
