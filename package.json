@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
 	  "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-	  "start:frontend": "npm --prefix frontend run dev",
-		"start:backend": "npm --prefix backend run start:dev"
+    "start:frontend": "npm --prefix frontend install && npm --prefix frontend run dev",
+    "start:backend": "npm --prefix backend install && npm --prefix backend run start"
   },
   "keywords": [],
   "author": "",
