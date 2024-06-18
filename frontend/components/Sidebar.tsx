@@ -10,18 +10,20 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ history }) => {
   return (
-
-      <div>
+    <div className="h-full overflow-y-auto">
+      <div className="flex justify-center mt-4">
         <Title level={2} className="text-light">Search History</Title>
-        <List
-          dataSource={history}
-          renderItem={(item) => (
-            <List.Item>
-              <SearchHistoryItem item={item} />
-            </List.Item>
-          )}
-        />
       </div>
+      <List
+        dataSource={history}
+        renderItem={(item) => (
+          <List.Item className="w-full">
+            <SearchHistoryItem item={item} />
+          </List.Item>
+        )}
+        className="w-full"
+      />
+    </div>
   );
 };
 

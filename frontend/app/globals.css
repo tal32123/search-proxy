@@ -21,4 +21,11 @@
   .text-dark {
     color: var(--dark-text-color);
   }
+  .ant-typography.text-light {
+    color: var(--light-text-color) !important;
+  }
+  
+  .ant-typography.text-dark {
+    color: var(--dark-text-color) !important;
+  }
 }

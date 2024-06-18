@@ -13,7 +13,12 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider width={250} className="site-layout-background">
+      <Sider
+        width={250}
+        className="site-layout-background"
+        breakpoint="lg"
+        collapsedWidth="0"
+      >
         <Sidebar history={history} />
       </Sider>
       <Layout>
@@ -22,7 +27,7 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
             <Menu.Item key="1">DuckDuckGo Search</Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+        <Content style={{ margin: '24px 16px 0', padding: 24, overflow: 'hidden' }}>
           <div className="site-layout-background" style={{ padding: 24 }}>
             {children}
           </div>
@@ -32,15 +37,14 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   );
 };
 
-export default function RootLayout({ children }:
-   { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-          <body>
-    <StoreProvider>
-      <AppLayout>{children}</AppLayout>
-    </StoreProvider>
-    </body>
+      <body>
+        <StoreProvider>
+          <AppLayout>{children}</AppLayout>
+        </StoreProvider>
+      </body>
     </html>
   );
 }
