@@ -9,9 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.21.0",
+    "@ant-design/icons": "^5.3.7",
+    "@ant-design/nextjs-registry": "^1.0.0",
+    "@reduxjs/toolkit": "^2.2.5",
+    "antd": "^5.18.2",
+    "axios": "^1.7.2",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-redux": "^9.1.2",
     "search-proxy": "file:.."
   },
   "devDependencies": {
