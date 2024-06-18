@@ -12,9 +12,9 @@ interface SearchHistoryItemProps {
 const SearchHistoryItem: React.FC<SearchHistoryItemProps> = ({ item }) => {
   return (
     <Tooltip title={item.query}>
-      <Card bordered={false} className="mx-2 w-full max-w-xs">
+      <Card bordered={false} className="mx-2 my-2 w-full max-w-full overflow-hidden">
         <div className="truncate">{item.query}</div>
-        <div>{new Date(item?.createdAt).toLocaleString()}</div>
+        <div>{new Date(item.createdAt).toLocaleString()}</div>
       </Card>
     </Tooltip>
   );

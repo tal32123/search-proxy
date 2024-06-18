@@ -13,18 +13,7 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        width={250}
-        className="site-layout-background"
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
+      <Sider width={250} className="site-layout-background">
         <Sidebar history={history} />
       </Sider>
       <Layout>
@@ -43,14 +32,15 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   );
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }:
+   { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <StoreProvider>
-          <AppLayout>{children}</AppLayout>
-        </StoreProvider>
-      </body>
+          <body>
+    <StoreProvider>
+      <AppLayout>{children}</AppLayout>
+    </StoreProvider>
+    </body>
     </html>
   );
 }

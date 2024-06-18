@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Layout, Typography } from 'antd';
+import { List, Typography } from 'antd';
 import SearchHistoryItem from './SearchHistoryItem';
 
 const { Title } = Typography;
@@ -11,7 +11,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ history }) => {
   return (
 
-      <div style={{ padding: '16px' }}>
+      <div>
         <Title level={2} className="text-light">Search History</Title>
         <List
           dataSource={history}
