@@ -18,6 +18,7 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         className="site-layout-background"
         breakpoint="lg"
         collapsedWidth="0"
+        style={{ height: '100vh' }}
       >
         <Sidebar history={history} />
       </Sider>
@@ -27,7 +28,7 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
             <Menu.Item key="1">DuckDuckGo Search</Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ margin: '24px 16px 0', padding: 24, overflow: 'hidden' }}>
+        <Content style={{ margin: '24px 16px 0', padding: 24 }}>
           <div className="site-layout-background" style={{ padding: 24 }}>
             {children}
           </div>

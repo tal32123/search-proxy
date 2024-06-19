@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { map } from 'rxjs/operators';
-import { HistoryService } from '../history/history.service';
-import { lastValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { DuckDuckGoResponse } from './entities/duckduckgo-response.interface';
- 
+import { lastValueFrom } from 'rxjs';
+import { HistoryService } from '../history/history.service';
+import { SearchResponseDto } from './dtos/search-response.dto';
+import { DuckDuckGoRelatedTopic, DuckDuckGoResponse } from './entities/duckduckgo-response.interface';
+
 @Injectable()
 export class DuckDuckGoService {
   constructor(
@@ -12,12 +13,32 @@ export class DuckDuckGoService {
     private readonly historyService: HistoryService
   ) {}
 
-  async search(query: string): Promise<DuckDuckGoResponse> {
+  async search(query: string): Promise<SearchResponseDto[]> {
     const url = `http://api.duckduckgo.com/?q=${query}&format=json`;
     const response = await lastValueFrom(this.httpService.get<DuckDuckGoResponse>(url).pipe(
       map(response => response.data)
     ));
     await this.historyService.create(query);
-    return response;
+
+    // Process response to extract URL and title
+    const results: SearchResponseDto[] = this.extractResults(response.RelatedTopics);
+
+    return results;
+  }
+
+  private extractResults(topics: DuckDuckGoRelatedTopic[]): SearchResponseDto[] {
+    let results: SearchResponseDto[] = [];
+
+    topics.forEach(topic => {
+      if (topic.FirstURL && topic.Text) {
+        results.push({ url: topic.FirstURL, title: topic.Text });
+      }
+
+      if (topic.Topics) {
+        results = results.concat(this.extractResults(topic.Topics));
+      }
+    });
+
+    return results;
   }
 }

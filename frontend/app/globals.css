@@ -2,30 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-sans m-0 p-0 box-border;
+}
+
 :root {
-  --light-text-color: #ffffff;
-  --dark-text-color: #ffffff;
+  --light-text-color: white; /* Light text color */
+  --dark-text-color: #000000; /* Dark text color */
+  --scrollbar-bg: #2c3e50; /* Background color for scrollbar */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --light-text-color: #ffffff;
-    --dark-text-color: #ffffff;
+    --light-text-color: white; /* Light alternative text color for dark mode */
+    --dark-text-color: #ffffff; /* Dark text color for dark mode */
+    --scrollbar-bg: #34495e; /* Dark mode background color for scrollbar */
   }
 }
 
 @layer utilities {
   .text-light {
-    color: var(--light-text-color);
-  }
-  .text-dark {
-    color: var(--dark-text-color);
-  }
-  .ant-typography.text-light {
     color: var(--light-text-color) !important;
   }
-  
-  .ant-typography.text-dark {
+  .text-dark {
     color: var(--dark-text-color) !important;
+  }
+
+  .site-layout-background {
+    background-color: var(--background-color);
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--light-text-color) var(--scrollbar-bg);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--light-text-color);
+    border-radius: 6px;
+    border: 3px solid var(--scrollbar-bg);
   }
 }
