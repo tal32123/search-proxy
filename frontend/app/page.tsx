@@ -26,18 +26,20 @@ const Home: React.FC = () => {
     if (value.trim() === '') return;
     const results = await search(value);
     dispatch(setSearchResults(results));
-    dispatch(addHistoryItem({ id: new Date().toISOString(), query: value, createdAt: new Date().toISOString() }));
+    dispatch(addHistoryItem({ id: new Date().getUTCDate(), query: value, createdAt: new Date() }));
   };
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Search
         placeholder="Enter search query"
         enterButton="Search"
         size="large"
         onSearch={handleSearch}
       />
-      <SearchContent />
+   <div className="flex-grow overflow-y-auto">
+        <SearchContent />
+      </div>    
     </div>
   );
 };

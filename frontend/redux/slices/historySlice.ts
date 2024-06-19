@@ -1,10 +1,6 @@
+import { HistoryItem } from '@/app/interfaces/history.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface HistoryItem {
-  id: string;
-  query: string;
-  createdAt: string;
-}
 
 interface HistoryState {
   items: HistoryItem[];

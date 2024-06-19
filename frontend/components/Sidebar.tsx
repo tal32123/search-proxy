@@ -1,11 +1,13 @@
 import React from 'react';
-import { List, Typography } from 'antd';
+import { Typography } from 'antd';
 import SimpleCard from './SimpleCard';
+import { HistoryItem } from '@/app/interfaces/history.interface';
+import SimpleList from './SimpleList';
 
 const { Title } = Typography;
 
 interface SidebarProps {
-  history: { id: string; query: string; createdAt: string }[];
+  history: HistoryItem[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ history }) => {
@@ -14,19 +16,12 @@ const Sidebar: React.FC<SidebarProps> = ({ history }) => {
       <div className="flex justify-center mt-4">
         <Title level={2} className="text-light">Search History</Title>
       </div>
-      <div className="flex-grow overflow-y-auto mt-0 custom-scrollbar">
-        <List
-          dataSource={history}
-          renderItem={(item) => (
-            <List.Item className="w-full p-0"
-            style={{padding: "1"}}>
-              <SimpleCard title={item.query} 
-              content={new Date(item.createdAt).toLocaleString()}/>
-            </List.Item>
-          )}
-          className="w-full"
-        />
-      </div>
+      <SimpleList
+        dataSource={history}
+        renderItem={(item : HistoryItem) => (
+          <SimpleCard title={item.query} content={new Date(item.createdAt).toLocaleString()} />
+        )}
+      />
     </div>
   );
 };

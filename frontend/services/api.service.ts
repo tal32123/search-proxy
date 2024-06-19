@@ -1,3 +1,4 @@
+import { HistoryItem } from '@/app/interfaces/history.interface';
 import { SearchResponseDto } from '@/app/interfaces/search-response.interface';
 import axios from 'axios';
 
@@ -16,7 +17,7 @@ export const search = async (query: string): Promise<SearchResponseDto[]> => {
   };
   
 
-  export const fetchHistory = async () => {
+  export const fetchHistory = async (): Promise<HistoryItem[]> => {
     try {
       const response = await api.get('/history');
       return response.data;

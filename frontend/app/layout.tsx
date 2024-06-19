@@ -18,7 +18,7 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         className="site-layout-background"
         breakpoint="lg"
         collapsedWidth="0"
-        style={{ height: '100vh' }}
+        style={{ height: '100vh',position: 'sticky', top: 0  }}
       >
         <Sidebar history={history} />
       </Sider>
