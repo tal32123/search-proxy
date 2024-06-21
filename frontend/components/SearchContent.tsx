@@ -1,11 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import SimpleList from './SimpleList';
-import SimpleCard from './SimpleCard';
-import { SearchResponseDto } from '@/app/interfaces/search-response.interface';
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import SimpleList from "./SimpleList";
+import { SearchResponseDto } from "@/interfaces/search-response.interface";
+import SearchResultCard from "./SearchResultCard";
 
-const SearchContent: React.FC = () => {
+export default function SearchContent() {
   const results = useSelector((state: RootState) => state.search.results);
 
   return (
@@ -15,7 +14,7 @@ const SearchContent: React.FC = () => {
         <SimpleList
           dataSource={results}
           renderItem={(item: SearchResponseDto) => (
-            <SimpleCard title={item.title} content={item.url} />
+            <SearchResultCard title={item.title} url={item.url} />
           )}
         />
       ) : (
@@ -23,6 +22,4 @@ const SearchContent: React.FC = () => {
       )}
     </div>
   );
-};
-
-export default SearchContent;
+}

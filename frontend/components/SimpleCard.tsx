@@ -1,12 +1,11 @@
-import React from 'react';
-import { Card, Flex, Tooltip } from 'antd';
+import { Card, Tooltip } from 'antd';
 
 interface SimpleCardProps {
     title: string;
     content: string;
 }
 
-const SimpleCard: React.FC<SimpleCardProps> = ({ title, content }) => {
+export default function SimpleCard ({ title, content }: SimpleCardProps) {
   return (
     <Tooltip title={title}>
       <Card bordered={false} className="mx-2 my-0 w-full max-w-full overflow-hidden">
@@ -16,5 +15,3 @@ const SimpleCard: React.FC<SimpleCardProps> = ({ title, content }) => {
     </Tooltip>
   );
 };
-
-export default SimpleCard;

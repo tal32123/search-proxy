@@ -1,5 +1,5 @@
-import { HistoryItem } from '@/app/interfaces/history.interface';
-import { SearchResponseDto } from '@/app/interfaces/search-response.interface';
+import { HistoryItem } from '@/interfaces/history.interface';
+import { SearchResponseDto } from '@/interfaces/search-response.interface';
 import axios from 'axios';
 
 const api = axios.create({

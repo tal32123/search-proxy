@@ -1,4 +1,4 @@
-import { HistoryItem } from '@/app/interfaces/history.interface';
+import { HistoryItem } from '@/interfaces/history.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
@@ -15,7 +15,7 @@ const historySlice = createSlice({
   initialState,
   reducers: {
     addHistoryItem: (state, action: PayloadAction<HistoryItem>) => {
-      state.items.push(action.payload);
+      state.items.unshift(action.payload);
     },
     setHistory: (state, action: PayloadAction<HistoryItem[]>) => {
       state.items = action.payload;

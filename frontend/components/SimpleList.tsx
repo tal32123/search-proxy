@@ -1,4 +1,3 @@
-import React from 'react';
 import { List } from 'antd';
 
 interface SimpleListProps<T> {
@@ -6,7 +5,7 @@ interface SimpleListProps<T> {
   renderItem: (item: T) => React.ReactNode;
 }
 
-const SimpleList = <T,>({ dataSource, renderItem }: SimpleListProps<T>) => {
+export default function SimpleList  <T,>({ dataSource, renderItem }: SimpleListProps<T>) {
   return (
     <div className="flex-grow overflow-y-auto custom-scrollbar max-h-full">
       <List
@@ -21,5 +20,3 @@ const SimpleList = <T,>({ dataSource, renderItem }: SimpleListProps<T>) => {
     </div>
   );
 };
-
-export default SimpleList;
