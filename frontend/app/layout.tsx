@@ -1,6 +1,6 @@
 import StoreProvider from "@/redux/StoreProvider";
-import AppLayout from "./layout/AppLayout";
 import './globals.css';
+import AppLayout from "./layout/AppLayout";
 
 
 export default function RootLayout({

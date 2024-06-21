@@ -1,5 +1,5 @@
 import { Typography } from 'antd';
-import SimpleCard from './SimpleCard';
+import SimpleCard from './cards/SimpleCard';
 import { HistoryItem } from '@/interfaces/history.interface';
 import SimpleList from './SimpleList';
 
@@ -10,7 +10,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar ({ history }: SidebarProps) {
-  
+
   return (
     <div className="h-full flex flex-col">
       <div className="flex justify-center mt-4">

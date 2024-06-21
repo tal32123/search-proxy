@@ -1,11 +1,12 @@
+import { SearchResponseDto } from '@/interfaces/search-response.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {
-  results: any | null;
+  results: SearchResponseDto[];
 }
 
 const initialState: SearchState = {
-  results: null,
+  results: [],
 };
 
 const searchSlice = createSlice({

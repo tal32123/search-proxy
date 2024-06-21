@@ -2,9 +2,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import SimpleList from "./SimpleList";
 import { SearchResponseDto } from "@/interfaces/search-response.interface";
-import SearchResultCard from "./SearchResultCard";
-
-export default function SearchContent() {
+import SearchResultCard from "./cards/SearchResultCard";
+interface SearchContentProps {
+  searchTerm: string;
+}
+export default function SearchContent({ searchTerm }: SearchContentProps)  {
   const results = useSelector((state: RootState) => state.search.results);
 
   return (
@@ -14,7 +16,7 @@ export default function SearchContent() {
         <SimpleList
           dataSource={results}
           renderItem={(item: SearchResponseDto) => (
-            <SearchResultCard title={item.title} url={item.url} />
+            <SearchResultCard title={item.title} url={item.url} searchTerm={searchTerm} />
           )}
         />
       ) : (
