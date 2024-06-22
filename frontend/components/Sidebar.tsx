@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "antd";
 import { HistoryItem } from "@/interfaces/history.interface";
-import SimpleList from "./SimpleList";
+import SimpleList from "./list/SimpleList";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "@/redux/slices/searchSlice";
 import SimpleCard from "./cards/SimpleCard";
