@@ -38,7 +38,7 @@ Make sure you have the following installed:
 
 1. Clone the repository
 2. In root folder of project, type npm start, wait until everything finishes logging as all dependencies will be installed and frontend will built for prod
-3. Frontend will run on http://localhost:3000/ and backend will be ran on port 300.
+3. Frontend will run on http://localhost:3000/ and backend will run on port 300.
 
 ## Notes
 - Swagger can be reached at http://localhost:3001/api when the project is running
