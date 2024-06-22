@@ -21,6 +21,7 @@ const searchSlice = createSlice({
   reducers: {
     addSearchResults: (state, action: PayloadAction<PagedSearchResultsResponseDto>) => {
       state.results = action.payload.results;
+      state.totalItems = action.payload.totalItems;
     },
     resetSearch: (state) => {
       state.results = [];
@@ -31,14 +32,11 @@ const searchSlice = createSlice({
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    setTotalItems: (state, action: PayloadAction<number>) => {
-      state.totalItems = action.payload;
-    },
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     }
   }
 });
 
-export const { addSearchResults, resetSearch, setCurrentPage, setTotalItems, setSearchTerm } = searchSlice.actions;
+export const { addSearchResults, resetSearch, setCurrentPage, setSearchTerm } = searchSlice.actions;
 export default searchSlice.reducer;
