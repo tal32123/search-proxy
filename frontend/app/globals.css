@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-sans m-0 p-0 box-border;
-}
-
 :root {
   --light-text-color: white; /* Light text color */
   --dark-text-color: #000000; /* Dark text color */
