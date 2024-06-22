@@ -1,10 +1,10 @@
-import React from "react";
-import { Typography } from "antd";
+ import { Typography } from "antd";
 import { HistoryItem } from "@/interfaces/history.interface";
 import SimpleList from "./list/SimpleList";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "@/redux/slices/searchSlice";
 import SimpleCard from "./cards/SimpleCard";
+import useTranslation from "@/i18n/useTranslation";
 
 const { Title } = Typography;
 
@@ -14,7 +14,7 @@ interface SidebarProps {
 
 export default function Sidebar({ history }: SidebarProps) {
   const dispatch = useDispatch();
-
+  const {t} = useTranslation();
   const handleCardClick = (query: string) => {
     dispatch(setSearchTerm(query));
   };
@@ -23,7 +23,7 @@ export default function Sidebar({ history }: SidebarProps) {
     <div className="h-full flex flex-col">
       <div className="flex justify-center mt-4">
         <Title level={2} className="text-light">
-          Search History
+          {t('SEARCH_HISTORY')}
         </Title>
       </div>
       <SimpleList<HistoryItem>

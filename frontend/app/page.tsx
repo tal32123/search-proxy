@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SearchContent from "@/components/SearchContent";
 import { setSearchTerm, resetSearch } from "@/redux/slices/searchSlice";
+import useTranslation from "@/i18n/useTranslation";
 
 const Home = () => {
   const dispatch = useDispatch();
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
   const [inputValue, setInputValue] = useState(searchTerm);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const loadHistory = async () => {
@@ -39,7 +41,7 @@ const Home = () => {
     <div className="flex flex-col">
       <div className="flex items-center flex-col sm:flex-row">
         <Input
-          placeholder="Enter search query"
+          placeholder={t('ENTER_SEARCH_QUERY')}
           size="large"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
@@ -52,7 +54,7 @@ const Home = () => {
           size="large"
           onClick={handleSearch}
         >
-          Search
+          {t('SEARCH')}
         </Button>
       </div>
       <SearchContent />
