@@ -33,20 +33,7 @@ const Home = () => {
     dispatch(setSearchTerm(inputValue));
   };
 
-  const countOccurrences = (text: string, term: string) => {
-    const regex = new RegExp(term, "gi");
-    return (text.match(regex) || []).length;
-  };
 
-  const totalOccurrences = useSelector(
-    (state: RootState) => state.search.results
-  ).reduce((acc: number, result: { title: string; url: string }) => {
-    return (
-      acc +
-      countOccurrences(result.title, searchTerm) +
-      countOccurrences(result.url, searchTerm)
-    );
-  }, 0);
 
   return (
     <div className="flex flex-col">
@@ -68,7 +55,6 @@ const Home = () => {
           Search
         </Button>
       </div>
-      {searchTerm && <div>Occurrences: {totalOccurrences}</div>}
       <SearchContent />
     </div>
   );
