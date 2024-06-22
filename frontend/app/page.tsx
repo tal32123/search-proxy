@@ -1,26 +1,23 @@
 "use client";
-import { useEffect } from "react";
-import { Input } from "antd";
-import { addSearchResults, resetSearch, setCurrentPage, setSearchTerm } from "../redux/slices/searchSlice";
-import { setHistory, addHistoryItem } from "../redux/slices/historySlice";
-import { fetchHistory, search } from "@/services/api.service";
+import { useEffect, useState } from "react";
+import { Input, Button } from "antd";
+import { setHistory } from "../redux/slices/historySlice";
+import { fetchHistory } from "@/services/api.service";
 import { HistoryItem } from "../interfaces/history.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SearchContent from "@/components/SearchContent";
-
-const { Search } = Input;
+import { setSearchTerm } from "@/redux/slices/searchSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const searchResults = useSelector((state: RootState) => state.search.results);
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
+  const [inputValue, setInputValue] = useState(searchTerm);
 
   useEffect(() => {
     const loadHistory = async () => {
       const history: HistoryItem[] = (await fetchHistory()).sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       dispatch(setHistory(history));
     };
@@ -28,18 +25,13 @@ const Home = () => {
     loadHistory();
   }, [dispatch]);
 
-  const handleSearch = async (value: string) => {
-    if (value.trim() === "") return;
-    dispatch(resetSearch());
-    dispatch(setSearchTerm(value));
-    dispatch(
-      addHistoryItem({
-        id: new Date().getTime(),
-        query: value,
-        createdAt: new Date(),
-      })
-    );
-    dispatch(setCurrentPage(1));
+  useEffect(() => {
+    setInputValue(searchTerm);
+  }, [searchTerm]);
+
+  const handleSearch = () => {
+    if (inputValue.trim() === "") return;
+    dispatch(setSearchTerm(inputValue));
   };
 
   const countOccurrences = (text: string, term: string) => {
@@ -47,28 +39,28 @@ const Home = () => {
     return (text.match(regex) || []).length;
   };
 
-  const totalOccurrences = searchResults.reduce(
+  const totalOccurrences = useSelector((state: RootState) => state.search.results).reduce(
     (acc: number, result: { title: string; url: string }) => {
-      return (
-        acc +
-        countOccurrences(result.title, searchTerm) +
-        countOccurrences(result.url, searchTerm)
-      );
+      return acc + countOccurrences(result.title, searchTerm) + countOccurrences(result.url, searchTerm);
     },
     0
   );
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="p-4">
-        <Search
+      <div className="p-4 flex items-center">
+        <Input
           placeholder="Enter search query"
-          enterButton="Search"
           size="large"
-          onSearch={handleSearch}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onPressEnter={handleSearch}
         />
-        {searchTerm && <div>Occurrences: {totalOccurrences}</div>}
+        <Button type="primary" size="large" onClick={handleSearch} className="ml-2">
+          Search
+        </Button>
       </div>
+      {searchTerm && <div>Occurrences: {totalOccurrences}</div>}
       <div className="flex-grow overflow-y-auto flex">
         <div className="flex-grow overflow-y-auto">
           <SearchContent />

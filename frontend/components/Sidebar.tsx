@@ -3,10 +3,7 @@ import { Typography } from 'antd';
 import { HistoryItem } from '@/interfaces/history.interface';
 import SimpleList from './SimpleList';
 import { useDispatch } from 'react-redux';
-import { addSearchResults, resetSearch, setCurrentPage, setSearchTerm } from '@/redux/slices/searchSlice';
-import { addHistoryItem } from '@/redux/slices/historySlice';
-import { search } from '@/services/api.service';
-import { PagedSearchResultsResponseDto } from '@/interfaces/search-response.interface';
+import { setSearchTerm } from '@/redux/slices/searchSlice';
 import SimpleCard from './cards/SimpleCard';
 
 const { Title } = Typography;
@@ -18,11 +15,8 @@ interface SidebarProps {
 export default function Sidebar({ history }: SidebarProps) {
   const dispatch = useDispatch();
 
-  const handleCardClick = async (query: string) => {
-    dispatch(resetSearch());
+  const handleCardClick = (query: string) => {
     dispatch(setSearchTerm(query));
-    dispatch(addHistoryItem({ id: new Date().getTime(), query, createdAt: new Date() }));
-    dispatch(setCurrentPage(1));
   };
 
   return (

@@ -21,7 +21,7 @@ export default function SearchContent() {
   };
 
   useEffect(() => {
-    if (results.length === 0 && searchTerm) {
+    if (searchTerm) {
       loadMoreData(1);
     }
   }, [searchTerm]);
