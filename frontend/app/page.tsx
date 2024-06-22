@@ -68,8 +68,6 @@ const Home = () => {
           enterButton="Search"
           size="large"
           onSearch={handleSearch}
-          value={searchTerm}
-          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
         {searchTerm && <div>Occurrences: {totalOccurrences}</div>}
       </div>
