@@ -1,4 +1,4 @@
-# Project Name
+# Search Proxy
 
 ## Description
 
