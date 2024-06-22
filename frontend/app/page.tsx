@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Input, Button } from "antd";
-import { addHistoryItem, setHistory } from "../redux/slices/historySlice";
-import { fetchHistory } from "@/services/api.service";
+import { setHistory } from "../redux/slices/historySlice";
+import { getHistory } from "@/services/api/api.service";
 import { HistoryItem } from "../interfaces/history.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     const loadHistory = async () => {
-      const history: HistoryItem[] = (await fetchHistory())
+      const history: HistoryItem[] = await getHistory();
       dispatch(setHistory(history));
     };
 
@@ -27,11 +27,10 @@ const Home = () => {
     setInputValue(searchTerm);
   }, [searchTerm]);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (inputValue.trim() === "") return;
     dispatch(resetSearch());
     dispatch(setSearchTerm(inputValue));
-    dispatch(addHistoryItem({ id: new Date().getTime(), query: inputValue, createdAt: new Date() }));
   };
 
   const countOccurrences = (text: string, term: string) => {
@@ -39,12 +38,15 @@ const Home = () => {
     return (text.match(regex) || []).length;
   };
 
-  const totalOccurrences = useSelector((state: RootState) => state.search.results).reduce(
-    (acc: number, result: { title: string; url: string }) => {
-      return acc + countOccurrences(result.title, searchTerm) + countOccurrences(result.url, searchTerm);
-    },
-    0
-  );
+  const totalOccurrences = useSelector(
+    (state: RootState) => state.search.results
+  ).reduce((acc: number, result: { title: string; url: string }) => {
+    return (
+      acc +
+      countOccurrences(result.title, searchTerm) +
+      countOccurrences(result.url, searchTerm)
+    );
+  }, 0);
 
   return (
     <div className="flex flex-col h-screen">
@@ -55,9 +57,14 @@ const Home = () => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onPressEnter={handleSearch}
-          style={{margin: 8}}
-         />
-        <Button type="primary" size="large" onClick={handleSearch}>
+          style={{ margin: 8 }}
+        />
+        <Button
+          type="primary"
+          disabled={!inputValue}
+          size="large"
+          onClick={handleSearch}
+        >
           Search
         </Button>
       </div>

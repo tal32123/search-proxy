@@ -18,9 +18,6 @@ export class DuckDuckGoService {
     const response = await lastValueFrom(this.httpService.get<DuckDuckGoResponse>(url).pipe(
       map(response => response.data)
     ));
-    //we do this in order to ensure that all initial searches 
-    //get to history even if there is a network failure
-    page == 1 && await this.historyService.create(query);
     
     // Process response to extract URL and title
     const results: SearchResponseDto[] = this.extractResults(response.RelatedTopics);

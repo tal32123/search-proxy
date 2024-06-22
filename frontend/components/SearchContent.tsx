@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import SimpleList from "./SimpleList";
-import { search } from "@/services/api.service";
 import { addSearchResults, setCurrentPage } from "@/redux/slices/searchSlice";
 import { SearchResponseDto } from "@/interfaces/search-response.interface";
 import SearchResultCard from "./cards/SearchResultCard";
- 
+import { addHistoryItem } from "@/redux/slices/historySlice";
+import { postHistoryItem, search } from "@/services/api/api.service";
+
 export default function SearchContent() {
   const dispatch = useDispatch();
   const results = useSelector((state: RootState) => state.search.results);
@@ -15,16 +16,30 @@ export default function SearchContent() {
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
 
   const loadMoreData = async (page: number) => {
-    const response = await search(searchTerm, page);
-    dispatch(addSearchResults(response));
-     dispatch(setCurrentPage(page));
+    try {
+      const response = await search(searchTerm, page);
+      dispatch(addSearchResults(response));
+      dispatch(setCurrentPage(page));
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
   };
 
   useEffect(() => {
-    if (searchTerm) {
-      loadMoreData(1);
-    }
-  }, [searchTerm]);
+    const fetchDataAndPostHistory = async () => {
+      if (searchTerm) {
+        try {
+          await loadMoreData(1);
+          const newHistoryItem = await postHistoryItem({ search: searchTerm });
+          dispatch(addHistoryItem(newHistoryItem));
+        } catch (error) {
+          console.error('Error during search or posting history:', error);
+        }
+      }
+    };
+
+    fetchDataAndPostHistory();
+  }, [searchTerm, dispatch]);
 
   return (
     <div className="h-full">

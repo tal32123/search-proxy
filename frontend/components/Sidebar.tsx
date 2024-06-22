@@ -5,7 +5,6 @@ import SimpleList from "./SimpleList";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "@/redux/slices/searchSlice";
 import SimpleCard from "./cards/SimpleCard";
-import { addHistoryItem } from "@/redux/slices/historySlice";
 
 const { Title } = Typography;
 
@@ -18,9 +17,6 @@ export default function Sidebar({ history }: SidebarProps) {
 
   const handleCardClick = (query: string) => {
     dispatch(setSearchTerm(query));
-    dispatch(
-      addHistoryItem({ id: new Date().getTime(), query, createdAt: new Date() })
-    );
   };
 
   return (
