@@ -50,17 +50,19 @@ export default function SimpleList<T>({
         dataSource={dataSource}
         renderItem={renderItem}
         loading={isLoading}
-        bordered
+        //antd only takes inline style many times
+        style={{height: 1000}}
       />
       {isPaginated && dataSource.length > 0 && (
-        <Pagination
-          current={currentPage}
-          pageSize={pageSize}
-          total={totalItems}
-          showSizeChanger={false}
-          onChange={handlePageChange}
-          className="mt-4"
-        />
+        <div className="mt-4 flex justify-center">
+          <Pagination
+            current={currentPage}
+            pageSize={pageSize}
+            total={totalItems}
+            showSizeChanger={false}
+            onChange={handlePageChange}
+          />
+        </div>
       )}
     </div>
   );

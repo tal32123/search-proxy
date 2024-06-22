@@ -25,11 +25,13 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         </div>
       </Sider>
       <Layout>
+      {/* antd only takes inline style many times */}
         <Header className="site-layout-background" style={{ padding: 0 }}>
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">DuckDuckGo Search</Menu.Item>
           </Menu>
         </Header>
+        {/* antd only takes inline style many times */}
         <Content style={{ margin: "8px", padding: 8 }}>
           <div className="site-layout-background" style={{ padding: 24 }}>
             {children}
