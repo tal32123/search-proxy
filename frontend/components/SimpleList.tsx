@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Pagination, Divider } from "antd";
+import { List, Pagination } from "antd";
 import { DEFAULT_PAGE_SIZE } from "@/consts/consts";
 
 interface SimpleListProps<T> {
