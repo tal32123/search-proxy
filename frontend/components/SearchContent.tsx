@@ -2,23 +2,17 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import SimpleList from "./SimpleList";
-import SearchResultCard from "./cards/SearchResultCard";
 import { search } from "@/services/api.service";
 import { addSearchResults, setCurrentPage } from "@/redux/slices/searchSlice";
 import { SearchResponseDto } from "@/interfaces/search-response.interface";
-import { Flex } from "antd";
+import SearchResultCard from "./cards/SearchResultCard";
 
-interface SearchContentProps {
-  searchTerm: string;
-}
-
-export default function SearchContent({ searchTerm }: SearchContentProps) {
+export default function SearchContent() {
   const dispatch = useDispatch();
   const results = useSelector((state: RootState) => state.search.results);
-  const currentPage = useSelector(
-    (state: RootState) => state.search.currentPage
-  );
+  const currentPage = useSelector((state: RootState) => state.search.currentPage);
   const totalItems = useSelector((state: RootState) => state.search.totalItems);
+  const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
 
   const loadMoreData = async (page: number) => {
     const response = await search(searchTerm, page);

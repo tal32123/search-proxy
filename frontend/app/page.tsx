@@ -1,21 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Input } from "antd";
-import { addSearchResults, resetSearch } from "../redux/slices/searchSlice";
+import { addSearchResults, resetSearch, setCurrentPage, setSearchTerm } from "../redux/slices/searchSlice";
 import { setHistory, addHistoryItem } from "../redux/slices/historySlice";
 import { fetchHistory, search } from "@/services/api.service";
 import { HistoryItem } from "../interfaces/history.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SearchContent from "@/components/SearchContent";
-import { Spin } from "antd";
 
 const { Search } = Input;
 
 const Home = () => {
   const dispatch = useDispatch();
   const searchResults = useSelector((state: RootState) => state.search.results);
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
 
   useEffect(() => {
     const loadHistory = async () => {
@@ -31,8 +30,8 @@ const Home = () => {
 
   const handleSearch = async (value: string) => {
     if (value.trim() === "") return;
-    setSearchTerm(value);
     dispatch(resetSearch());
+    dispatch(setSearchTerm(value));
     dispatch(
       addHistoryItem({
         id: new Date().getTime(),
@@ -40,6 +39,9 @@ const Home = () => {
         createdAt: new Date(),
       })
     );
+    const response = await search(value, 1);
+    dispatch(addSearchResults(response));
+    dispatch(setCurrentPage(1));
   };
 
   const countOccurrences = (text: string, term: string) => {
@@ -66,11 +68,15 @@ const Home = () => {
           enterButton="Search"
           size="large"
           onSearch={handleSearch}
+          value={searchTerm}
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
         {searchTerm && <div>Occurrences: {totalOccurrences}</div>}
       </div>
-      <div className="flex-grow overflow-y-auto">
-        <SearchContent searchTerm={searchTerm} />
+      <div className="flex-grow overflow-y-auto flex">
+        <div className="flex-grow overflow-y-auto">
+          <SearchContent />
+        </div>
       </div>
     </div>
   );
