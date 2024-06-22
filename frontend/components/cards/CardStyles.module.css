@@ -1,0 +1,11 @@
+.card {
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

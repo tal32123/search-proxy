@@ -1,4 +1,5 @@
-import { Card, Tooltip } from 'antd';
+import { Card, Tooltip } from "antd";
+import styles from "./CardStyles.module.css";
 
 interface SimpleCardProps {
   title: string;
@@ -6,13 +7,19 @@ interface SimpleCardProps {
   onClick: () => void;
 }
 
-export default function SimpleCard({ title, content, onClick }: SimpleCardProps) {
+export default function SimpleCard({
+  title,
+  content,
+  onClick,
+}: SimpleCardProps) {
   return (
     <Tooltip title={title}>
-      <Card bordered={false} style={{margin: 2}} onClick={onClick}>
-        <div className="truncate">{title}</div>
-        <div>{content}</div>
-      </Card>
+      <div className={styles.card}>
+        <Card bordered={false} onClick={onClick}>
+          <div className="truncate">{title}</div>
+          <div className="truncate">{content}</div>
+        </Card>
+      </div>
     </Tooltip>
   );
-};
+}
