@@ -24,10 +24,7 @@ const searchSlice = createSlice({
       state.totalItems = action.payload.totalItems;
     },
     resetSearch: (state) => {
-      state.results = [];
-      state.currentPage = 1;
-      state.totalItems = 0;
-      state.searchTerm = '';
+      state = initialState;
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;

@@ -1,10 +1,10 @@
-import { DEFAULT_PAGE_SIZE } from '@/consts/consts';
+import { BASE_URL, DEFAULT_PAGE_SIZE } from '@/consts/consts';
 import { HistoryItem } from '@/interfaces/history.interface';
 import { PagedSearchResultsResponseDto } from '@/interfaces/search-response.interface';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: BASE_URL,
 });
 
 export const search = async (query: string, page: number = 1, pageSize: number = DEFAULT_PAGE_SIZE): Promise<PagedSearchResultsResponseDto> => {
@@ -20,7 +20,10 @@ export const search = async (query: string, page: number = 1, pageSize: number =
 export const fetchHistory = async (): Promise<HistoryItem[]> => {
   try {
     const response = await api.get('/history');
-    return response.data;
+    const data: HistoryItem[] = response.data;
+    return data.sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
   } catch (error) {
     console.error('Fetch History API Error:', error);
     throw error;

@@ -1,13 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Input, Button } from "antd";
-import { setHistory } from "../redux/slices/historySlice";
+import { addHistoryItem, setHistory } from "../redux/slices/historySlice";
 import { fetchHistory } from "@/services/api.service";
 import { HistoryItem } from "../interfaces/history.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SearchContent from "@/components/SearchContent";
-import Sidebar from "@/components/Sidebar";
 import { setSearchTerm, resetSearch } from "@/redux/slices/searchSlice";
 
 const Home = () => {
@@ -17,9 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     const loadHistory = async () => {
-      const history: HistoryItem[] = (await fetchHistory()).sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+      const history: HistoryItem[] = (await fetchHistory())
       dispatch(setHistory(history));
     };
 
@@ -34,6 +31,7 @@ const Home = () => {
     if (inputValue.trim() === "") return;
     dispatch(resetSearch());
     dispatch(setSearchTerm(inputValue));
+    dispatch(addHistoryItem({ id: new Date().getTime(), query: inputValue, createdAt: new Date() }));
   };
 
   const countOccurrences = (text: string, term: string) => {
@@ -50,15 +48,15 @@ const Home = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="p-4 flex items-center">
+      <div className="flex items-center flex-col sm:flex-row">
         <Input
           placeholder="Enter search query"
           size="large"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onPressEnter={handleSearch}
-          className="mr-2"
-        />
+          style={{margin: 8}}
+         />
         <Button type="primary" size="large" onClick={handleSearch}>
           Search
         </Button>

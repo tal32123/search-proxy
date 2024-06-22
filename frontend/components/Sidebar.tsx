@@ -1,10 +1,11 @@
-import React from 'react';
-import { Typography } from 'antd';
-import { HistoryItem } from '@/interfaces/history.interface';
-import SimpleList from './SimpleList';
-import { useDispatch } from 'react-redux';
-import { setSearchTerm } from '@/redux/slices/searchSlice';
-import SimpleCard from './cards/SimpleCard';
+import React from "react";
+import { Typography } from "antd";
+import { HistoryItem } from "@/interfaces/history.interface";
+import SimpleList from "./SimpleList";
+import { useDispatch } from "react-redux";
+import { setSearchTerm } from "@/redux/slices/searchSlice";
+import SimpleCard from "./cards/SimpleCard";
+import { addHistoryItem } from "@/redux/slices/historySlice";
 
 const { Title } = Typography;
 
@@ -17,19 +18,28 @@ export default function Sidebar({ history }: SidebarProps) {
 
   const handleCardClick = (query: string) => {
     dispatch(setSearchTerm(query));
+    dispatch(
+      addHistoryItem({ id: new Date().getTime(), query, createdAt: new Date() })
+    );
   };
 
   return (
     <div className="h-full flex flex-col">
       <div className="flex justify-center mt-4">
-        <Title level={2} className="text-light">Search History</Title>
+        <Title level={2} className="text-light">
+          Search History
+        </Title>
       </div>
       <SimpleList<HistoryItem>
         dataSource={history}
         renderItem={(item: HistoryItem) => (
-          <SimpleCard title={item.query} content={new Date(item.createdAt).toLocaleString()} onClick={() => handleCardClick(item.query)} />
+          <SimpleCard
+            title={item.query}
+            content={new Date(item.createdAt).toLocaleString()}
+            onClick={() => handleCardClick(item.query)}
+          />
         )}
       />
     </div>
   );
-};
+}

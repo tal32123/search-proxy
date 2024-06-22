@@ -12,18 +12,7 @@ body {
   --scrollbar-bg: #2c3e50; /* Background color for scrollbar */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --light-text-color: white; /* Light alternative text color for dark mode */
-    --dark-text-color: #ffffff; /* Dark text color for dark mode */
-    --scrollbar-bg: #34495e; /* Dark mode background color for scrollbar */
-  }
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 @layer utilities {
   .text-light {
     color: var(--light-text-color) !important;

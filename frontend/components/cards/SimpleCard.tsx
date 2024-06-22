@@ -9,7 +9,7 @@ interface SimpleCardProps {
 export default function SimpleCard({ title, content, onClick }: SimpleCardProps) {
   return (
     <Tooltip title={title}>
-      <Card bordered={false} className="mx-2 my-0 w-full max-w-full overflow-hidden" onClick={onClick}>
+      <Card bordered={false} style={{margin: 2}} onClick={onClick}>
         <div className="truncate">{title}</div>
         <div>{content}</div>
       </Card>

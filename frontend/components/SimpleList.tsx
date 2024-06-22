@@ -23,8 +23,13 @@ export default function SimpleList<T>({
   isPaginated = false,
   isDisableScroll = false,
 }: SimpleListProps<T>) {
-  if(isPaginated && (currentPage == undefined || loadMoreData == undefined || totalItems == undefined)){
-    throw new Error("Must have all properties for pagination if paginating")
+  if (
+    isPaginated &&
+    (currentPage == undefined ||
+      loadMoreData == undefined ||
+      totalItems == undefined)
+  ) {
+    throw new Error("Must have all properties for pagination if paginating");
   }
   let isLoading = false;
   const handlePageChange = (page: number) => {
@@ -34,7 +39,13 @@ export default function SimpleList<T>({
   };
 
   return (
-    <div className={`${isDisableScroll ? '' : 'flex-grow overflow-y-auto custom-scrollbar max-h-full'}`}>
+    <div
+      className={`${
+        isDisableScroll
+          ? ""
+          : "flex-grow overflow-y-auto custom-scrollbar max-h-full"
+      }`}
+    >
       <List
         dataSource={dataSource}
         renderItem={renderItem}
