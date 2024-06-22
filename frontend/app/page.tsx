@@ -39,8 +39,6 @@ const Home = () => {
         createdAt: new Date(),
       })
     );
-    const response = await search(value, 1);
-    dispatch(addSearchResults(response));
     dispatch(setCurrentPage(1));
   };
 

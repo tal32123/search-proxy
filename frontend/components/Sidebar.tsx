@@ -22,8 +22,6 @@ export default function Sidebar({ history }: SidebarProps) {
     dispatch(resetSearch());
     dispatch(setSearchTerm(query));
     dispatch(addHistoryItem({ id: new Date().getTime(), query, createdAt: new Date() }));
-    const response: PagedSearchResultsResponseDto = await search(query, 1);
-    dispatch(addSearchResults(response));
     dispatch(setCurrentPage(1));
   };
 
