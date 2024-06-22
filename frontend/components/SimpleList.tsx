@@ -51,17 +51,19 @@ export default function SimpleList<T>({
         renderItem={renderItem}
         loading={isLoading}
         bordered
+        pagination={
+          isPaginated
+            ? {
+                align: "center",
+                current: currentPage,
+                pageSize: pageSize,
+                total: totalItems,
+                showSizeChanger: false,
+                onChange: handlePageChange,
+              }
+            : false
+        }
       />
-      {isPaginated && dataSource.length > 0 && (
-        <Pagination
-          current={currentPage}
-          pageSize={pageSize}
-          total={totalItems}
-          showSizeChanger={false}
-          onChange={handlePageChange}
-          className="mt-4"
-        />
-      )}
     </div>
   );
 }
