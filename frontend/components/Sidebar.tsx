@@ -1,3 +1,4 @@
+import React from 'react';
 import { Typography } from 'antd';
 import SimpleCard from './cards/SimpleCard';
 import { HistoryItem } from '@/interfaces/history.interface';
@@ -9,19 +10,18 @@ interface SidebarProps {
   history: HistoryItem[];
 }
 
-export default function Sidebar ({ history }: SidebarProps) {
-
+export default function Sidebar({ history }: SidebarProps) {
   return (
     <div className="h-full flex flex-col">
       <div className="flex justify-center mt-4">
         <Title level={2} className="text-light">Search History</Title>
       </div>
-      <SimpleList
+      <SimpleList<HistoryItem>
         dataSource={history}
         renderItem={(item: HistoryItem) => (
           <SimpleCard title={item.query} content={new Date(item.createdAt).toLocaleString()} />
         )}
-      />
+         />
     </div>
   );
 };

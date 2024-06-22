@@ -1,14 +1,15 @@
+import { DEFAULT_PAGE_SIZE } from '@/consts/consts';
 import { HistoryItem } from '@/interfaces/history.interface';
-import { SearchResponseDto } from '@/interfaces/search-response.interface';
+import { PagedSearchResultsResponseDto } from '@/interfaces/search-response.interface';
 import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
 
-export const search = async (query: string, page: number = 1, pageSize: number = 2): Promise<SearchResponseDto[]> => {
+export const search = async (query: string, page: number = 1, pageSize: number = DEFAULT_PAGE_SIZE): Promise<PagedSearchResultsResponseDto> => {
   try {
-    const response = await api.get<SearchResponseDto[]>(`/search?q=${query}&page=${page}&pageSize=${pageSize}`);
+    const response = await api.get<PagedSearchResultsResponseDto>(`/search?q=${query}&page=${page}&pageSize=${pageSize}`);
     return response.data;
   } catch (error) {
     console.error('Search API Error:', error);

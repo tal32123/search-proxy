@@ -1,14 +1,16 @@
+import { PagedSearchResultsResponseDto, SearchResponseDto } from '@/interfaces/search-response.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SearchResponseDto } from '@/interfaces/search-response.interface';
 
 interface SearchState {
   results: SearchResponseDto[];
   currentPage: number;
+  totalItems: number;
 }
 
 const initialState: SearchState = {
   results: [],
   currentPage: 1,
+  totalItems: 0,
 };
 
 const searchSlice = createSlice({
@@ -18,19 +20,21 @@ const searchSlice = createSlice({
     setSearchResults(state, action: PayloadAction<SearchResponseDto[]>) {
       state.results = action.payload;
     },
-    addSearchResults(state, action: PayloadAction<SearchResponseDto[]>) {
-      state.results = [...state.results, ...action.payload];
+    addSearchResults(state, action: PayloadAction<PagedSearchResultsResponseDto>) {
+      state.results = action.payload.results;
+      state.totalItems = action.payload.totalItems;
     },
-    incrementPage(state) {
-      state.currentPage += 1;
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
     },
     resetSearch(state) {
       state.results = [];
       state.currentPage = 1;
+      state.totalItems = 0;
     },
   },
 });
 
-export const { setSearchResults, addSearchResults, incrementPage, resetSearch } = searchSlice.actions;
+export const { setSearchResults, addSearchResults, setCurrentPage, resetSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;

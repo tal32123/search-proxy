@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { DuckDuckGoService } from './duckduckgo.service';
-import { SearchResponseDto } from './dtos/search-response.dto';
+import { PagedSearchResultsResponseDto } from './dtos/search-response.dto';
 
 @Controller('search')
 export class DuckDuckGoController {
@@ -12,7 +12,7 @@ export class DuckDuckGoController {
     @Query('q') query: string,
     @Query('page') page: string = this.INITIAL_PAGE,
     @Query('pageSize') pageSize: string = this.DEFAULT_PAGE_SIZE
-  ): Promise<SearchResponseDto[]> {
+  ): Promise<PagedSearchResultsResponseDto> {
     let numPageSize = parseInt(pageSize);
     let numPage = parseInt(page);
 
