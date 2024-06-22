@@ -20,7 +20,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         breakpoint="lg"
         collapsedWidth="0"
       >
-        {" "}
         <div className={`h-screen sticky top-0`}>
           <Sidebar history={history} />
         </div>
