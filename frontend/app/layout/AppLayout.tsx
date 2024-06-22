@@ -2,6 +2,7 @@
 import { Layout, Menu } from "antd";
 import Sidebar from "@/components/Sidebar";
 import { useAppSelector } from "@/redux/store";
+import useTranslation from "@/i18n/useTranslation";
 
 const { Header, Content, Sider } = Layout;
 
@@ -11,6 +12,7 @@ interface AppLayoutProps {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const history = useAppSelector((state) => state.history.items);
+  const { t } = useTranslation();
 
   return (
     <Layout>
@@ -28,7 +30,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       {/* antd only takes inline style many times */}
         <Header className="site-layout-background" style={{ padding: 0 }}>
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1">DuckDuckGo Search</Menu.Item>
+            <Menu.Item key="1">{t('DUCK_DUCK_GO_SEARCH')}</Menu.Item>
           </Menu>
         </Header>
         {/* antd only takes inline style many times */}
