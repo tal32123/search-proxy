@@ -13,7 +13,7 @@ export class DuckDuckGoService {
     private readonly historyService: HistoryService
   ) {}
 
-  async search(query: string): Promise<SearchResponseDto[]> {
+  async search(query: string, page: number, pageSize: number): Promise<SearchResponseDto[]> {
     const url = `http://api.duckduckgo.com/?q=${query}&format=json`;
     const response = await lastValueFrom(this.httpService.get<DuckDuckGoResponse>(url).pipe(
       map(response => response.data)
@@ -23,7 +23,12 @@ export class DuckDuckGoService {
     // Process response to extract URL and title
     const results: SearchResponseDto[] = this.extractResults(response.RelatedTopics);
 
-    return results;
+    // Implement paging
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const pagedResults : SearchResponseDto[] = results.slice(startIndex, endIndex);
+
+    return pagedResults;
   }
 
   private extractResults(topics: DuckDuckGoRelatedTopic[]): SearchResponseDto[] {
