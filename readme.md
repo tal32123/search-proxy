@@ -37,5 +37,5 @@ Make sure you have the following installed:
 
 ## Notes
 - There is a history endpoint which can post as requested, however, I found it to make much more sense to log the history when doing the search in case there is a failure, the history will still be logged. 
-    -This endpoint can still be tested in using swagger.
-- Swagger can be reached app http://localhost:3001/api when the project is running
+    - This endpoint can still be tested in using swagger.
+- Swagger can be reached at http://localhost:3001/api when the project is running
