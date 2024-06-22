@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-	  "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+	  "start": "npm i && concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "start:frontend": "npm --prefix frontend install && npm --prefix frontend run build && npm --prefix frontend start",
     "start:backend": "npm --prefix backend install && npm --prefix backend run start:dev"
   },
