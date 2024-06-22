@@ -16,10 +16,13 @@ The application is styled with Ant Design components and utilizes Redux Toolkit 
 ## Technologies Used
 
 - **React**: A JavaScript library for building user interfaces.
+- **NextJs**: A React framework, utilized as React states to use a framework for new projects.
 - **Redux Toolkit**: A library that simplifies Redux state management.
 - **TypeScript**: A typed superset of JavaScript that enhances code quality and developer productivity.
 - **Ant Design**: A UI library that provides a set of high-quality React components.
 - **Axios**: A promise-based HTTP client for making API requests.
+- **TypeOrm**: Used as the ORM.
+- **SQLite**: Used as a persistent data store for history.
 
 ## Getting Started
 
