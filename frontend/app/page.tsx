@@ -7,7 +7,8 @@ import { HistoryItem } from "../interfaces/history.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SearchContent from "@/components/SearchContent";
-import { setSearchTerm } from "@/redux/slices/searchSlice";
+import Sidebar from "@/components/Sidebar";
+import { setSearchTerm, resetSearch } from "@/redux/slices/searchSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Home = () => {
 
   const handleSearch = () => {
     if (inputValue.trim() === "") return;
+    dispatch(resetSearch());
     dispatch(setSearchTerm(inputValue));
   };
 
@@ -48,24 +50,21 @@ const Home = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="flex items-center">
+      <div className="p-4 flex items-center">
         <Input
           placeholder="Enter search query"
           size="large"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onPressEnter={handleSearch}
+          className="mr-2"
         />
-        <Button type="primary" size="large" onClick={handleSearch} className="ml-2">
+        <Button type="primary" size="large" onClick={handleSearch}>
           Search
         </Button>
       </div>
       {searchTerm && <div>Occurrences: {totalOccurrences}</div>}
-      <div className="flex-grow overflow-y-auto flex">
-        <div className="flex-grow overflow-y-auto">
-          <SearchContent />
-        </div>
-      </div>
+      <SearchContent />
     </div>
   );
 };

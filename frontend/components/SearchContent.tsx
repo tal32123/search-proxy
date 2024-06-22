@@ -6,7 +6,7 @@ import { search } from "@/services/api.service";
 import { addSearchResults, setCurrentPage } from "@/redux/slices/searchSlice";
 import { SearchResponseDto } from "@/interfaces/search-response.interface";
 import SearchResultCard from "./cards/SearchResultCard";
-
+ 
 export default function SearchContent() {
   const dispatch = useDispatch();
   const results = useSelector((state: RootState) => state.search.results);
@@ -17,7 +17,7 @@ export default function SearchContent() {
   const loadMoreData = async (page: number) => {
     const response = await search(searchTerm, page);
     dispatch(addSearchResults(response));
-    dispatch(setCurrentPage(page));
+     dispatch(setCurrentPage(page));
   };
 
   useEffect(() => {
@@ -27,10 +27,11 @@ export default function SearchContent() {
   }, [searchTerm]);
 
   return (
-    <div>
+    <div className="h-full">
       {searchTerm && (
         <SimpleList
           dataSource={results}
+          isDisableScroll={true}
           renderItem={(item: SearchResponseDto) => (
             <SearchResultCard
               key={item.url}
