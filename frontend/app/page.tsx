@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="p-4 flex items-center">
+      <div className="flex items-center">
         <Input
           placeholder="Enter search query"
           size="large"

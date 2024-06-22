@@ -29,7 +29,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <Menu.Item key="1">DuckDuckGo Search</Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ margin: '24px 16px 0', padding: 24 }}>
+        <Content style={{ margin: '8px', padding: 8 }}>
           <div className="site-layout-background" style={{ padding: 24 }}>
             {children}
           </div>
