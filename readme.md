@@ -12,7 +12,7 @@ The application is styled with Ant Design components and utilizes Redux Toolkit 
 - **Pagination**: Search results are paginated for easier navigation.
 - **Responsive Design**: The layout adjusts for different screen sizes, ensuring a good user experience on both desktop and mobile devices.
 - **Api documentation on backend**: Swagger is utilized in the backend in order to document the endpoints and their data.
-- **translation files**: A simple translation system was created for the purposes of this app in order to be quick and efficient.
+- **i18n**: A simple translation system was created for this app in order to be quick and efficient.
 
 ## Technologies Used
 
@@ -45,11 +45,13 @@ Make sure you have the following installed:
 - You will see log lines
 from Nest:
 
-'Nest application successfully started' 
+``` Nest application successfully started```
 
-and from nextjs something similar to
+and from Nextjs something similar to
 
+```
 ▲ Next.js 14.2.4
 Local:        http://localhost:3000
 ✓ Starting...
 ✓ Ready
+```
