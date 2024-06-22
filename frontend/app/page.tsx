@@ -49,7 +49,7 @@ const Home = () => {
   }, 0);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       <div className="flex items-center flex-col sm:flex-row">
         <Input
           placeholder="Enter search query"
