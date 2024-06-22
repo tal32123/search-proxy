@@ -9,12 +9,13 @@ export class DuckDuckGoController {
   @Get()
   async search(
     @Query('q') query: string,
-    @Query('page') page: number = 1,
-    @Query('pageSize') pageSize: number = 2
+    @Query('page') page: string = "1",
+    @Query('pageSize') pageSize: string = "2"
   ): Promise<SearchResponseDto[]> {
-    console.log(pageSize);
-    console.log(page);
-    let result = await this.duckDuckGoService.search(query, page, pageSize);
+    let numPageSize = parseInt(pageSize);
+    let numPage = parseInt(page);
+
+    let result = await this.duckDuckGoService.search(query, numPage, numPageSize);
     console.log(result);
     return result;
   }

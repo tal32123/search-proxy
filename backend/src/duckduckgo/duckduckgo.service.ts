@@ -19,13 +19,13 @@ export class DuckDuckGoService {
       map(response => response.data)
     ));
     await this.historyService.create(query);
-
+    
     // Process response to extract URL and title
     const results: SearchResponseDto[] = this.extractResults(response.RelatedTopics);
 
     // Implement paging
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
+    const startIndex: number = (page - 1) * pageSize;
+    const endIndex: number = startIndex + pageSize;
     const pagedResults : SearchResponseDto[] = results.slice(startIndex, endIndex);
 
     return pagedResults;
