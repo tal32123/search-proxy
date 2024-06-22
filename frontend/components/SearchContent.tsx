@@ -1,8 +1,8 @@
 import React from "react";
 import SimpleList from "./SimpleList";
 import SearchResultCard from "./cards/SearchResultCard";
-import { useSearch } from "@/hooks/use-search";
- 
+import { useSearch } from "@/hooks/useSearch";
+  
 const SearchContent: React.FC = () => {
   const { results, currentPage, totalItems, searchTerm, isLoading, loadMoreData } = useSearch();
 
