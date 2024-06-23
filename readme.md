@@ -10,7 +10,6 @@ The application is styled with Ant Design components and utilizes Redux Toolkit 
 - **Search Functionality**: Users can enter search queries and view results.
 - **Search History**: The application keeps track of past searches and displays them in a sidebar.
 - **Pagination**: Search results are paginated for easier navigation.
-- **Responsive Design**: The layout adjusts for different screen sizes, ensuring a good user experience on both desktop and mobile devices.
 - **Api documentation on backend**: Swagger is utilized in the backend in order to document the endpoints and their data.
 - **i18n**: A simple translation system was created for this app in order to be quick and efficient.
 
