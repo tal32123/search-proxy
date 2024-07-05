@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a web application built using NestJs, NexJs, React, Redux, and TypeScript. The application allows users to perform searches, view search history, and display search results with pagination. 
+This project is a web application built using NestJs, NextJs, React, Redux, and TypeScript. The application allows users to perform searches, view search history, and display search results with pagination. 
 The application is styled with Ant Design components and utilizes Redux Toolkit for state management.
 
 ## Features
